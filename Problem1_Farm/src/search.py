@@ -6,7 +6,7 @@ import matplotlib.pyplot as pl
 class solution(np.ndarray):
     pass
 
-
+# Check whether the mt is in the collection.
 def isIn(mt:np.ndarray, ls:list)->bool:
     r = mt.shape[0]
     c = mt.shape[1]
@@ -36,6 +36,7 @@ class TS:
         self.rows = len(plants)
         self.cols = len(lands)
         self.production = production
+        self.optSolution = solution((self.rows, self.cols))
 
         self.tabuLength = tabuLength
         self.tabuList = list()
@@ -73,7 +74,7 @@ class TS:
 
         i = 0
         while i < self.rows:
-
+            # Generate a vector of random numbers.
             for j in range(self.cols):
                 rowChange[j] = rd.randint(-1, 1)
 
@@ -109,6 +110,7 @@ class TS:
                 if not isIn(item, self.tabuList):
                     # The optimal solution of each iteration. 
                     slt = item
+                    self.optSolution = slt
 
                     self.axesX.append( k + 1 )
                     self.axesY.append(self.grade(slt))
